@@ -1,0 +1,18 @@
+/*
+ Theme Name:   Revareva Child
+ Theme URI:    https://cariasoft.com/revareva-child/
+ Description:  Revareva teması için child theme
+ Author:       Senin Adın
+ Author URI:   https://cariasoft.com
+ Template:     revareva          ← ← ← BURASI ÇOK ÖNEMLİ! Parent theme klasör adıyla birebir aynı olmalı
+ Version:      1.0.0
+ Text Domain:  revareva-child
+*/
+
+@import url("../revareva/assets/css/main.css");
+
+/* Buraya ileride child theme'e özel CSS'lerini ekleyebilirsin */
+/* Örneğin: */
+body {
+    /* özel stil örnek */
+}

@@ -26,6 +26,16 @@ remove_action(
 );
 
 
-
+/**
+ * Header tipini koşullu olarak seç
+ */
+add_filter('get_header', function($name) {
+    if (is_shop() || is_product_category() || is_product_tag() || is_product()) {
+        $name = 'white';
+    } elseif (is_front_page()) {
+        $name = 'default';
+    }
+    return $name;
+}, 10, 1);
 
 ?>

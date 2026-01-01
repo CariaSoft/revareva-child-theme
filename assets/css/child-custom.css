@@ -1,0 +1,79 @@
+/* Revareva Child Özel CSS Dosyası */
+/* Buraya kategori sayfası için override'lar ekleyebilirsin */
+
+.sidebar-categories h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-list li a {
+    transition: color 0.3s ease;
+}
+
+.category-list li a:hover {
+    color: #007bff;
+}
+
+/* Header-white – Birebir kategori.html eşleşmesi */
+#mainHeader.bg-white {
+    background-color: #fff !important; /* Beyaz arka plan zorla */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important; /* Hafif gölge */
+}
+
+.navbar-brand img {
+    height: 40px !important; /* Logo boyu sabit 40, büyümeyecek */
+    width: auto !important;
+}
+
+.navbar-nav .nav-link {
+    color: #000 !important; /* Koyu siyah menü linkleri */
+    font-weight: 500 !important; /* Medium bold */
+    opacity: 1 !important; /* Soluk beyaz efekti kaldır */
+    transition: none !important; /* Kayma efekti yok */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #000 !important; /* Hover'da değişmez */
+}
+
+.header-icons a {
+    color: #000 !important; /* Koyu siyah iconlar */
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* Siyah hamburger */
+}
+
+/* Scroll/kayma efekti kaldırma – Parent'tan override */
+#mainHeader.fixed-top {
+    transition: none !important;
+}
+#mainHeader .nav-link, #mainHeader .header-icons a {
+    color: #000 !important;
+    opacity: 1 !important;
+}
+
+/* Scroll efekti override – kategori.html gibi sabit */
+#mainHeader.bg-white .navbar-nav .nav-link {
+    color: #000 !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+#mainHeader.bg-white .header-icons a {
+    color: #000 !important;
+    opacity: 1 !important;
+}
+
+#mainHeader.bg-white .navbar-brand img {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Logo boyu sabitle (header-default ile aynı) */
+.navbar-brand img {
+    height: 40px !important;
+    max-height: 40px !important;
+}

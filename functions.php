@@ -7,6 +7,11 @@ function revareva_child_enqueue_styles() {
 
     // Child theme'e özel ekstra CSS eklemek istersen (opsiyonel)
     wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', array('parent-style'));
+
+    wp_enqueue_style('child-custom', get_stylesheet_directory_uri() . '/assets/css/child-custom.css', array('child-style'), '1.0.0');
+
+    wp_enqueue_script('child-custom', get_stylesheet_directory_uri() . '/assets/js/child-custom.js', array('jquery'), '1.0.0', true);
+    
 }
 
 

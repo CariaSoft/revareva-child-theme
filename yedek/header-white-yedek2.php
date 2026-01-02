@@ -7,7 +7,7 @@
 <?php get_template_part('template-parts/announcement-bar'); ?>
 
 <!-- Kategori sayfası için SABİT beyaz header – kategori.html birebir -->
-<header id="mainHeaderWhite" class="navbar navbar-expand-lg fixed-top bg-white">
+<header id="mainHeader" class="navbar navbar-expand-lg fixed-top bg-white">
     <div class="container-fluid px-1 px-sm-2 px-md-3 px-lg-4 px-xl-4 mt-2">
         <!-- Tek siyah logo -->
         <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>">

@@ -151,58 +151,17 @@ $current_cat = get_queried_object();
                             <div class="accordion-body">
                                 <?php foreach ($terms as $term): 
                                     $is_checked = in_array($term->slug, $current_filters[$attribute->attribute_name]);
-                                    
-                                    // Renk özniteliği için özel gösterim
-                                    if ($attribute->attribute_name === 'renk') {
-                                        // Plugin'in renk değerini al
-                                        $color_value = get_term_meta($term->term_id, 'product_attribute_color', true);
-                                        
-                                        // Eğer plugin değeri yoksa, kendi alanımızdan al
-                                        if (!$color_value) {
-                                            $color_value = get_term_meta($term->term_id, 'color_value', true);
-                                        }
-                                        
-                                        // Hala yoksa varsayılan
-                                        if (!$color_value) {
-                                            $color_value = '#cccccc';
-                                        }
-                                        ?>
-                                        <div class="color-option d-flex align-items-center gap-3 mb-2">
-                                            <input class="form-check-input mt-0" type="checkbox" 
-                                                   id="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>" 
-                                                   name="<?php echo esc_attr($filter_key); ?>[]" 
-                                                   value="<?php echo esc_attr($term->slug); ?>"
-                                                   <?php echo $is_checked ? 'checked' : ''; ?>>
-                                            
-                                            <!-- Renk swatch'u -->
-                                            <div class="color-swatch" 
-                                                 style="background-color: <?php echo esc_attr($color_value); ?>; 
-                                                        width: 24px; height: 24px; border-radius: 4px; 
-                                                        border: 1px solid #ddd;"
-                                                 title="<?php echo esc_attr($term->name); ?>">
-                                            </div>
-                                            
-                                            <label class="form-check-label" for="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>">
-                                                <?php echo esc_html($term->name); ?>
-                                            </label>
-                                        </div>
-                                        <?php
-                                    } else {
-                                        // Diğer öznitelikler için standart gösterim
-                                        ?>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" 
-                                                   id="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>" 
-                                                   name="<?php echo esc_attr($filter_key); ?>[]" 
-                                                   value="<?php echo esc_attr($term->slug); ?>"
-                                                   <?php echo $is_checked ? 'checked' : ''; ?>>
-                                            <label class="form-check-label" for="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>">
-                                                <?php echo esc_html($term->name); ?>
-                                            </label>
-                                        </div>
-                                        <?php
-                                    }
                                 ?>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" 
+                                           id="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>" 
+                                           name="<?php echo esc_attr($filter_key); ?>[]" 
+                                           value="<?php echo esc_attr($term->slug); ?>"
+                                           <?php echo $is_checked ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="<?php echo esc_attr($attribute->attribute_name . '_' . $term->slug); ?>">
+                                        <?php echo esc_html($term->name); ?>
+                                    </label>
+                                </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>

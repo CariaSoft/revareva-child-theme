@@ -38,16 +38,16 @@
 
         <!-- Sağ İkonlar (beyaz iconlar) -->
         <div class="d-flex align-items-center gap-2 gap-sm-3 header-icons ms-auto">
-            <a href="#" class="text-white fs-5" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas">
+            <a href="#" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas">
                 <i class="fas fa-search fs-5"></i>
             </a>
-            <a href="#" class="text-white fs-5" data-bs-toggle="offcanvas" data-bs-target="#accountOffcanvas">
+            <a href="#" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#accountOffcanvas">
                 <i class="fa-regular fa-user fs-5"></i>
             </a>
-            <a href="#" class="text-white fs-5" data-bs-toggle="offcanvas" data-bs-target="#favoritesOffcanvas">
+            <a href="#" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#favoritesOffcanvas">
                 <i class="fa-regular fa-heart fs-5"></i>
             </a>
-            <a href="#" class="text-white position-relative fs-5" data-bs-toggle="offcanvas" data-bs-target="#accountOffcanvas" data-bs-tab="cart">
+            <a href="#" class="text-white position-relative" data-bs-toggle="offcanvas" data-bs-target="#accountOffcanvas" data-bs-tab="cart">
                 <i class="fa-solid fa-bag-shopping fs-5"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger small">
                     <?php echo WC()->cart->get_cart_contents_count(); ?>

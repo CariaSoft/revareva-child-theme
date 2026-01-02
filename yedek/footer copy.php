@@ -316,138 +316,109 @@
       </div>
     </div>
 
-
-      <!-- =========================
- OFFCANVAS 2: ARAMA - DİNAMİK VERSİYON
- ========================= -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="searchOffcanvas" aria-labelledby="searchOffcanvasLabel">
-  <div class="offcanvas-header border-bottom">
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
-  </div>
-  <div class="offcanvas-body">
-    <!-- Arama Input -->
-    <div class="mb-4">
-      <div class="input-group input-group-lg">
-        <span class="input-group-text bg-white border-0">
-          <i class="fas fa-search"></i>
-        </span>
-        <input
-          type="text"
-          class="form-control border-0 border-bottom shadow-none"
-          placeholder="<?php _e('ÜRÜN ARAYINIZ...', 'revareva'); ?>"
-          id="searchInput"
-          autofocus
-        />
+    <!-- =========================
+     OFFCANVAS 2: ARAMA
+     ========================= -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="searchOffcanvas" aria-labelledby="searchOffcanvasLabel">
+      <div class="offcanvas-header border-bottom">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
       </div>
-    </div>
-
-    <!-- Popüler Aramalar -->
-    <div class="mb-4">
-      <h6 class="fw-bold mb-3"><?php _e('POPÜLER ARAMALAR', 'revareva'); ?></h6>
-      <div class="d-flex flex-wrap gap-2">
-        <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"
-          ><?php _e('DIŞ GİYİM', 'revareva'); ?></a
-        >
-        <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('ELBİSE', 'revareva'); ?></a>
-        <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('CEKET', 'revareva'); ?></a>
-        <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('PANTOLON', 'revareva'); ?></a>
-      </div>
-    </div>
-
-    <!-- Arama Sonuçları - DİNAMİK -->
-    <div id="searchResults">
-      <h6 class="fw-bold mb-3"><?php _e('SON EKLENEN ÜRÜNLER', 'revareva'); ?></h6>
-      
-      <?php
-      // Son 4 ürünü getir
-      $recent_products_args = array(
-          'post_type'      => 'product',
-          'posts_per_page' => 4,
-          'orderby'        => 'date',
-          'order'          => 'DESC',
-          'post_status'    => 'publish',
-      );
-      
-      $recent_products = new WP_Query($recent_products_args);
-      
-      if ($recent_products->have_posts()) :
-          while ($recent_products->have_posts()) : $recent_products->the_post();
-              global $product;
-              
-              // Ürün linki
-              $product_url = get_permalink();
-              
-              // İndirim bilgisi
-              $regular_price = $product->get_regular_price();
-              $sale_price = $product->get_sale_price();
-              $has_discount = $sale_price && $regular_price && $regular_price > $sale_price;
-              
-              // Görsel ID
-              $image_id = $product->get_image_id();
-              
-              // Görsel - tıklanabilir olacak
-              if ($image_id) {
-                  $image_html = wp_get_attachment_image($image_id, 'woocommerce_thumbnail', false, array('class' => 'img-fluid', 'alt' => get_the_title()));
-              } else {
-                  $image_html = wc_placeholder_img('woocommerce_thumbnail');
-              }
-              ?>
-              
-              <!-- Ürün Kartı - TIKLANABİLİR -->
-              <div class="search-result-item border-bottom pb-3 mb-3 position-relative">
-                <a href="<?php echo esc_url($product_url); ?>" class="stretched-link" aria-label="<?php echo esc_attr(get_the_title()); ?> ürün sayfasına git"></a>
-                <div class="row">
-                  <div class="col-3">
-                    <!-- Görsel - tıklanabilir -->
-                    <div class="position-relative">
-                      <?php echo $image_html; ?>
-                    </div>
-                  </div>
-                  <div class="col-9 position-relative">
-                    <!-- Başlık - tıklanabilir -->
-                    <h6 class="mb-1 text-dark">
-                      <?php the_title(); ?>
-                    </h6>
-                    <!-- Fiyat - tıklanabilir -->
-                    <p class="mb-1">
-                      <?php if ($has_discount): ?>
-                        <span class="text-decoration-line-through text-muted">
-                          <?php echo wc_price($regular_price); ?>
-                        </span>
-                        <span class="fw-bold ms-2 text-dark">
-                          <?php echo wc_price($sale_price); ?>
-                        </span>
-                      <?php else: ?>
-                        <span class="fw-bold text-dark">
-                          <?php echo $product->get_price_html(); ?>
-                        </span>
-                      <?php endif; ?>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-          <?php
-          endwhile;
-          wp_reset_postdata();
-      else :
-          ?>
-          <div class="text-center py-3">
-            <p class="text-muted"><?php _e('Henüz ürün eklenmemiş.', 'revareva'); ?></p>
+      <div class="offcanvas-body">
+        <!-- Arama Input -->
+        <div class="mb-4">
+          <div class="input-group input-group-lg">
+            <span class="input-group-text bg-white border-0">
+              <i class="fas fa-search"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control border-0 border-bottom shadow-none"
+              placeholder="<?php _e('ÜRÜN ARAYINIZ...', 'revareva'); ?>"
+              id="searchInput"
+              autofocus
+            />
           </div>
-      <?php
-      endif;
-      ?>
+        </div>
+
+        <!-- Popüler Aramalar -->
+        <div class="mb-4">
+          <h6 class="fw-bold mb-3"><?php _e('POPÜLER ARAMALAR', 'revareva'); ?></h6>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"
+              ><?php _e('DIŞ GİYİM', 'revareva'); ?></a
+            >
+            <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('ELBİSE', 'revareva'); ?></a>
+            <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('CEKET', 'revareva'); ?></a>
+            <a href="#" class="badge bg-light text-dark text-decoration-none py-2 px-3"><?php _e('PANTOLON', 'revareva'); ?></a>
+          </div>
+        </div>
+
+        <!-- Arama Sonuçları -->
+        <div id="searchResults">
+          <h6 class="fw-bold mb-3"><?php _e('ÜRÜNLER', 'revareva'); ?></h6>
+
+          <!-- Örnek Sonuç -->
+          <div class="search-result-item border-bottom pb-3 mb-3">
+            <div class="row">
+              <div class="col-3">
+                <?php 
+                $search_product_image_id_1 = 117; // ← Örnek ürün fotoğrafı ID
+                echo wp_get_attachment_image($search_product_image_id_1, 'woocommerce_thumbnail', false, array('class' => 'img-fluid', 'alt' => 'Ürün'));
+                ?>
+              </div>
+              <div class="col-9">
+                <h6 class="mb-1"><?php _e('İçi Kürklü Denim Ceket', 'revareva'); ?></h6>
+                <p class="mb-1">
+                  <span class="text-decoration-line-through text-muted">₺ 23.650,00</span>
+                  <span class="fw-bold ms-2">₺ 16.555,00</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="search-result-item border-bottom pb-3 mb-3">
+            <div class="row">
+              <div class="col-3">
+                <?php 
+                $search_product_image_id_2 = 118; // ← Örnek ürün fotoğrafı ID
+                echo wp_get_attachment_image($search_product_image_id_2, 'woocommerce_thumbnail', false, array('class' => 'img-fluid', 'alt' => 'Ürün'));
+                ?>
+              </div>
+              <div class="col-9">
+                <h6 class="mb-1"><?php _e('İnci Biyeli Payet Geçişli Siyah Yelek', 'revareva'); ?></h6>
+                <p class="mb-1">
+                  <span class="text-decoration-line-through text-muted">₺ 14.580,00</span>
+                  <span class="fw-bold ms-2">₺ 10.206,00</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="search-result-item border-bottom pb-3 mb-3">
+            <div class="row">
+              <div class="col-3">
+                <?php 
+                $search_product_image_id_3 = 119; // ← Örnek ürün fotoğrafı ID
+                echo wp_get_attachment_image($search_product_image_id_3, 'woocommerce_thumbnail', false, array('class' => 'img-fluid', 'alt' => 'Ürün'));
+                ?>
+              </div>
+              <div class="col-9">
+                <h6 class="mb-1"><?php _e('Ekru Kol Detaylı Lacivert Triko Elbise', 'revareva'); ?></h6>
+                <p class="mb-1">
+                  <span class="text-decoration-line-through text-muted">₺ 19.115,00</span>
+                  <span class="fw-bold ms-2">₺ 13.380,50</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
 
     <!-- ===== FOOTER ===== -->
     <footer class="site-footer">

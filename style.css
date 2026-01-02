@@ -16,3 +16,127 @@
 body {
     /* özel stil örnek */
 }
+
+/* Kategori sayfası breadcrumb ve navigasyon düzeltmeleri */
+body.page-category {
+    padding-top: 120px; /* Header yüksekliği kadar */
+}
+
+/* Parent temanın padding-top kuralını geçersiz kılma */
+.page-category {
+    padding-top: 120px !important; /* Header yüksekliği kadar */
+}
+
+.page-category .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.page-category .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Ürünler arası boşluk ayarı */
+.page-category .row {
+    --bs-gutter-x: 1.5rem;
+}
+
+/* Breadcrumb görünümünü sağla */
+.breadcrumb {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Kategori navigasyonu görünümünü sağla */
+.category-section {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ürün grid ayarları */
+.page-category .col-6,
+.page-category .col-md-3 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Ürün kartı içeriği için padding */
+.page-category .product-card {
+    padding: 10px;
+}
+
+/* Mobil cihazlar için header yüksekliği ayarı */
+@media (max-width: 767px) {
+    .page-category {
+        padding-top: 100px; /* Mobilde header yüksekliği */
+    }
+}
+
+/* Daha küçük mobil cihazlar için */
+@media (max-width: 575px) {
+    .page-category {
+        padding-top: 90px; /* Daha küçük cihazlar için */
+    }
+}
+
+/* Offcanvas backdrop'ı kaldır (klasik Bootstrap 5 offcanvas davranışı) */
+.offcanvas-backdrop {
+    background-color: transparent !important;
+}
+
+.offcanvas-backdrop.show {
+    opacity: 0 !important;
+}
+
+/* Sıralama seçenekleri stilleri */
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.sort-options-wrapper {
+    flex: 1;
+}
+
+.sort-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sort-radio {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.sort-radio:checked {
+    background-color: #000;
+}
+
+.sort-label {
+    margin: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.sort-apply-btn {
+    margin-top: auto;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+    font-weight: normal;
+}

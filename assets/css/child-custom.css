@@ -1,79 +1,892 @@
-/* Revareva Child Özel CSS Dosyası */
-/* Buraya kategori sayfası için override'lar ekleyebilirsin */
+/*
+ * Revareva Child - WooCommerce Kategori Sayfası Düzeltmeleri
+ */
 
-.sidebar-categories h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.category-list li a {
-    transition: color 0.3s ease;
-}
-
-.category-list li a:hover {
-    color: #007bff;
-}
-
-/* Header-white – Birebir kategori.html eşleşmesi */
-#mainHeader.bg-white {
-    background-color: #fff !important; /* Beyaz arka plan zorla */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important; /* Hafif gölge */
-}
-
-.navbar-brand img {
-    height: 40px !important; /* Logo boyu sabit 40, büyümeyecek */
+/* ===== 1. HEADER LOGO'YU ESKİ HALİNE GETİR ===== */
+/* Logo'yu küçült */
+#mainHeader .navbar-brand img,
+#mainHeaderWhite .navbar-brand img {
+    height: 40px !important;
+    max-height: 40px !important;
     width: auto !important;
 }
 
-.navbar-nav .nav-link {
-    color: #000 !important; /* Koyu siyah menü linkleri */
-    font-weight: 500 !important; /* Medium bold */
-    opacity: 1 !important; /* Soluk beyaz efekti kaldır */
-    transition: none !important; /* Kayma efekti yok */
+/* Navbar'ın kendi yüksekliğini koru */
+#mainHeader.navbar,
+#mainHeaderWhite.navbar {
+    min-height: 80px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
-.navbar-nav .nav-link:hover {
-    color: #000 !important; /* Hover'da değişmez */
+/* Navbar içeriğini düzenle */
+#mainHeader .container-fluid,
+#mainHeaderWhite .container-fluid {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 60px !important;
 }
 
-.header-icons a {
-    color: #000 !important; /* Koyu siyah iconlar */
-    opacity: 1 !important;
-    transition: none !important;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* Siyah hamburger */
-}
-
-/* Scroll/kayma efekti kaldırma – Parent'tan override */
-#mainHeader.fixed-top {
-    transition: none !important;
-}
-#mainHeader .nav-link, #mainHeader .header-icons a {
-    color: #000 !important;
-    opacity: 1 !important;
-}
-
-/* Scroll efekti override – kategori.html gibi sabit */
-#mainHeader.bg-white .navbar-nav .nav-link {
-    color: #000 !important;
-    opacity: 1 !important;
-    transition: none !important;
-}
-
-#mainHeader.bg-white .header-icons a {
-    color: #000 !important;
-    opacity: 1 !important;
-}
-
-#mainHeader.bg-white .navbar-brand img {
-    opacity: 1 !important;
+/* ===== 2. BREADCRUMB VE KATEGORİ NAVİGASYONUNU GÖRÜNÜR YAP ===== */
+.woocommerce-breadcrumb {
+    display: block !important;
     visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 1rem !important;
+    font-size: 0.9rem !important;
+    color: #666 !important;
 }
 
-/* Logo boyu sabitle (header-default ile aynı) */
-.navbar-brand img {
-    height: 40px !important;
-    max-height: 40px !important;
+.woocommerce-breadcrumb a {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.woocommerce-breadcrumb a:hover {
+    text-decoration: underline !important;
+}
+
+/* Kategori navigasyonu - HEADER'DAN AYIR */
+.category-section {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border-bottom: 1px solid #eee;
+    padding-top: 30px !important; /* Header'dan boşluk */
+    padding-bottom: 20px !important;
+    margin-top: 0 !important;
+    margin-bottom: 30px !important;
+    background-color: #fff !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Header'dan sonra gelen container'ı düzenle */
+.container-fluid.px-1.px-sm-2.px-md-3.px-lg-4.px-xl-4.pt-3.pb-3 {
+    padding-top: 5px !important; /* Header'dan boşluk */
+    padding-bottom: 5px !important;
+    background-color: #fff !important;
+    margin-top: 70px !important; /* Header yüksekliği kadar boşluk */
+}
+
+/* Breadcrumb'ı da düzenle */
+.woocommerce-breadcrumb {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-top: 15px !important;
+    margin-bottom: 20px !important;
+    font-size: 0.9rem !important;
+    color: #666 !important;
+    padding-top: 10px !important;
+}
+
+
+.subcategory-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.subcategory-link:hover,
+.subcategory-link.active {
+    color: #000;
+    background-color: #f5f5f5;
+}
+
+/* ===== 3. ÜRÜN GRID - SADECE KATEGORİ SAYFALARI ===== */
+/* Container fluid düzeni */
+body.tax-product_cat .container-fluid.px-0,
+body.post-type-archive-product .container-fluid.px-0 {
+    width: 100% !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+/* Row düzeni */
+body.tax-product_cat .row.mx-0,
+body.post-type-archive-product .row.mx-0 {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+/* Grid sütunları - YATAYDA BOŞLUK YOK */
+body.tax-product_cat .col-6.col-md-4.col-lg-3,
+body.post-type-archive-product .col-6.col-md-4.col-lg-3 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+/* Desktop: 4 sütun */
+@media (min-width: 992px) {
+    body.tax-product_cat .col-lg-3,
+    body.post-type-archive-product .col-lg-3 {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+    }
+    
+    /* Her 4. üründen sonra sağ border'ı kaldır */
+    body.tax-product_cat .col-lg-3:nth-child(4n),
+    body.post-type-archive-product .col-lg-3:nth-child(4n) {
+        border-right: none !important;
+    }
+}
+
+/* Tablet: 3 sütun */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    body.tax-product_cat .col-md-4,
+    body.post-type-archive-product .col-md-4 {
+        flex: 0 0 33.333333% !important;
+        max-width: 33.333333% !important;
+    }
+    
+    /* Her 3. üründen sonra sağ border'ı kaldır */
+    body.tax-product_cat .col-md-4:nth-child(3n),
+    body.post-type-archive-product .col-md-4:nth-child(3n) {
+        border-right: none !important;
+    }
+}
+
+/* Mobil: 2 sütun */
+@media (max-width: 767.98px) {
+    body.tax-product_cat .col-6,
+    body.post-type-archive-product .col-6 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+    
+    /* Her 2. üründen sonra sağ border'ı kaldır */
+    body.tax-product_cat .col-6:nth-child(2n),
+    body.post-type-archive-product .col-6:nth-child(2n) {
+        border-right: none !important;
+    }
+}
+
+/* Çok küçük ekran: 1 sütun */
+@media (max-width: 575.98px) {
+    body.tax-product_cat .col-6,
+    body.post-type-archive-product .col-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        border-right: none !important;
+    }
+}
+
+/* ===== 4. ÜRÜN KARTI TASARIMI ===== */
+body.tax-product_cat .product-card,
+body.post-type-archive-product .product-card {
+    background: #fff;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+
+body.tax-product_cat .product-card:hover,
+body.post-type-archive-product .product-card:hover {
+    background-color: #f9f9f9;
+}
+
+/* ===== 5. FOTOĞRAF - KARE ORAN (1:1) ===== */
+body.tax-product_cat .product-image,
+body.post-type-archive-product .product-image {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #f8f8f8;
+    aspect-ratio: 1 / 1 !important;
+}
+
+/* Eski tarayıcılar için fallback */
+@supports not (aspect-ratio: 1 / 1) {
+    body.tax-product_cat .product-image::before,
+    body.post-type-archive-product .product-image::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    
+    body.tax-product_cat .product-image a,
+    body.post-type-archive-product .product-image a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+body.tax-product_cat .product-image a,
+body.post-type-archive-product .product-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Görsel - Kare oran koru */
+body.tax-product_cat .product-image img,
+body.post-type-archive-product .product-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+/* ===== 6. ÜRÜN BİLGİSİ ===== */
+body.tax-product_cat .product-info,
+body.post-type-archive-product .product-info {
+    padding: 15px;
+    min-height: 100px;
+}
+
+/* Ürün başlığı */
+body.tax-product_cat .product-title,
+body.post-type-archive-product .product-title {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+/* Fiyat */
+body.tax-product_cat .product-price .price,
+body.post-type-archive-product .product-price .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    display: block;
+}
+
+body.tax-product_cat .product-price .price del,
+body.post-type-archive-product .product-price .price del {
+    color: #999;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 5px;
+}
+
+body.tax-product_cat .product-price .price ins,
+body.post-type-archive-product .product-price .price ins {
+    background: transparent;
+    text-decoration: none;
+    color: #d32f2f;
+}
+
+/* Stretched link */
+body.tax-product_cat .stretched-link,
+body.post-type-archive-product .stretched-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* ===== 7. RESPONSIVE AYARLAR ===== */
+@media (max-width: 991.98px) {
+    body.tax-product_cat .product-info,
+    body.post-type-archive-product .product-info {
+        padding: 12px;
+        min-height: 90px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body.tax-product_cat .product-title,
+    body.post-type-archive-product .product-title {
+        font-size: 13px;
+        min-height: 36px;
+    }
+    
+    body.tax-product_cat .product-price .price,
+    body.post-type-archive-product .product-price .price {
+        font-size: 14px;
+    }
+    
+    body.tax-product_cat .product-info,
+    body.post-type-archive-product .product-info {
+        padding: 10px;
+        min-height: 85px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    body.tax-product_cat .product-info,
+    body.post-type-archive-product .product-info {
+        min-height: 80px;
+    }
+}
+
+/* ===== 8. SAYFALAMA VE DİĞER BÖLÜMLER ===== */
+/* Sayfalama */
+.woocommerce-pagination {
+    margin-top: 40px;
+    padding: 0 15px;
+}
+
+/* Footer'ı koru */
+.site-footer,
+.prestij-blok {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.site-footer .container-fluid {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* ===== 9. PRODUCT GALLERY STYLES ===== */
+.product-gallery {
+    height: 600px; /* Match the height of product details */
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.product-gallery img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Hide default WooCommerce gallery */
+.woocommerce-product-gallery {
+    display: none !important;
+}
+
+.woocommerce-product-gallery--with-images .flex-clone {
+    display: none !important;
+}
+
+.woocommerce-product-gallery__wrapper {
+    display: none !important;
+}
+
+.woocommerce-product-gallery__image {
+    display: none !important;
+}
+
+.flex-control-nav {
+    display: none !important;
+}
+
+.flex-direction-nav {
+    display: none !important;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.thumbnail.active {
+    border-color: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-gallery {
+        height: 400px;
+    }
+    
+    .thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Center images properly */
+.product-main .col-md-6 .product-gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adjust for equal height with product details */
+.product-details {
+    height: 600px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        height: auto;
+    }
+    
+    .product-gallery {
+        height: 400px;
+    }
+}
+
+/* ===== 10. PRODUCT DETAILS SPACING FIX ===== */
+.product-details .border-top a {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+/* Reduce spacing for product info links */
+.product-details .border-top .d-block.py-2 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+/* Adjust for consistent vertical spacing */
+.product-details .border-top {
+    padding-top: 0.5rem;
+}
+
+/* ===== 11. PRODUCT DETAILS FONT SIZES ===== */
+/* Adjust font sizes for product details to match links */
+.product-details .fs-3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.product-details h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ===== 12. TEMİZLEME ===== */
+/* Tüm elementleri görünür yap (güvenlik) */
+body * {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Sadece kategori sayfaları için grid stillerini uygula */
+body:not(.tax-product_cat):not(.post-type-archive-product) .row,
+body:not(.tax-product_cat):not(.post-type-archive-product) .col-6,
+body:not(.tax-product_cat):not(.post-type-archive-product) .col-md-4,
+body:not(.tax-product_cat):not(.post-type-archive-product) .col-lg-3 {
+    /* Normal Bootstrap davranışı - değiştirme */
+}
+
+/* Normal sayfalarda container-fluid padding'ini koru */
+body:not(.tax-product_cat):not(.post-type-archive-product) .container-fluid {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+}
+
+
+/* ===== 13. DUYURU BARI VE HEADER İLİŞKİSİ ===== */
+/* Duyuru Barı */
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1051;
+  padding: 12px 0;
+  background-color: #212529; /* bg-dark */
+  overflow: hidden;
+}
+
+.announcement-wrapper {
+  position: relative;
+  height: 28px; /* Sabit yükseklik */
+  overflow: hidden;
+}
+
+.announcement-item {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  
+  /* DİKEY VE YATAY ORTALAMA */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* YAZI STİLLERİ */
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 14px;
+}
+
+.announcement-item.active {
+  top: 0;
+  opacity: 1;
+}
+
+.announcement-item.exit {
+  top: -100%;
+  opacity: 0;
+}
+
+/* Hover durumunda alt çizgiyi engelle ve hafif soluklaştır */
+.announcement-item:hover {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  opacity: 0.8;
+}
+
+/* Mobil */
+@media (max-width: 576px) {
+  .announcement-bar {
+    height: 42px;
+  }
+  .announcement-item {
+    font-size: 0.875rem;
+    padding: 0 10px;
+  }
+}
+
+/* ===== 14. ANA SAYFA HEADER STİLİ (#mainHeader) ===== */
+/* HEADER TEMEL */
+#mainHeader {
+  top: 40px; /* Duyuru barı yüksekliği */
+  transition: all 0.4s ease;
+  background-color: transparent;
+  z-index: 1000;
+}
+
+/* Büyük ekran (≥992px) */
+@media (min-width: 992px) {
+  /* Açılışta transparan + beyaz içerik */
+  #mainHeader .logo-white { display: inline-block !important; }
+  #mainHeader .logo-dark  { display: none !important; }
+
+  #mainHeader .nav-link,
+  #mainHeader .header-icon i,
+  #mainHeader .search-button i,
+  #mainHeader .search-button span {
+    color: #ffffff !important;
+  }
+
+  /* Scroll sonrası beyaz arka plan + siyah içerik */
+  #mainHeader.scrolled {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  #mainHeader.scrolled .logo-white { display: none !important; }
+  #mainHeader.scrolled .logo-dark  { display: inline-block !important; }
+
+  #mainHeader.scrolled .nav-link,
+  #mainHeader.scrolled .header-icon i,
+  #mainHeader.scrolled .search-button i,
+  #mainHeader.scrolled .search-button span {
+    color: #000000 !important;
+  }
+}
+
+/* Küçük ekran (<992px) - Her zaman beyaz + siyah */
+@media (max-width: 991.98px) {
+  #mainHeader {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  #mainHeader .logo-white { display: none !important; }
+  #mainHeader .logo-dark  { display: inline-block !important; }
+
+  #mainHeader .nav-link,
+  #mainHeader .header-icon i,
+  #mainHeader .search-button i,
+  #mainHeader .search-button span {
+    color: #000000 !important;
+  }
+
+  /* Hamburger siyah olsun */
+  #mainHeader .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+}
+
+/* ===== 15. HEADER WHITE STİLİ ===== */
+/* Header White için */
+#mainHeaderWhite {
+  top: 40px; /* Duyuru barı yüksekliği */
+  transition: all 0.4s ease;
+  background-color: #ffffff !important;
+  z-index: 1000;
+}
+
+/* Header white için sabit siyah içerik (scroll olsa bile değişmez) */
+#mainHeaderWhite .logo-white { display: none !important; }
+#mainHeaderWhite .logo-dark  { display: inline-block !important; }
+
+#mainHeaderWhite .nav-link,
+#mainHeaderWhite .header-icon i,
+#mainHeaderWhite .search-button i,
+#mainHeaderWhite .search-button span {
+  color: #000000 !important;
+}
+
+#mainHeaderWhite.scrolled {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Kategori sayfası için header stili */
+.page-category #mainHeaderWhite {
+  background-color: #fff !important;
+}
+
+.page-category #mainHeaderWhite .navbar-brand,
+.page-category #mainHeaderWhite .nav-link {
+  color: #000 !important;
+}
+
+.page-category #mainHeaderWhite .logo-white {
+  display: none !important;
+}
+
+.page-category #mainHeaderWhite .logo-dark {
+  display: inline-block !important;
+}
+
+.page-category #mainHeaderWhite .header-icon i {
+  color: #000 !important;
+}
+
+/* Kategori sayfasında scroll efekti iptal edilir */
+.page-category #mainHeaderWhite.scrolled {
+  background-color: #fff !important;
+}
+
+.page-category #mainHeaderWhite.scrolled .navbar-brand,
+.page-category #mainHeaderWhite.scrolled .nav-link {
+  color: #000 !important;
+}
+
+.page-category #mainHeaderWhite.scrolled .logo-white {
+  display: none !important;
+}
+
+.page-category #mainHeaderWhite.scrolled .logo-dark {
+  display: inline-block !important;
+}
+
+.page-category #mainHeaderWhite.scrolled .header-icon i {
+  color: #000 !important;
+}
+
+/* Header ikonlar genel stil */
+.header-icon {
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.header-icon:hover i {
+  transform: scale(1.1);
+}
+
+/* İkonların altında çizgi olmasını engelle */
+.header-icon::after {
+  display: none !important;
+}
+
+/* Nav Link Alt Çizgi Efekti - Sadece desktop'ta aktif */
+@media (min-width: 992px) {
+  .nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+}
+
+/* İkonlar için hover efekti */
+a i {
+  transition: transform 0.2s ease;
+}
+a:hover i {
+  transform: scale(1.1);
+}
+
+/* Offcanvas Menü */
+.offcanvas {
+  width: 90% !important;
+  max-width: 450px;
+  z-index: 1200;
+}
+
+.offcanvas-body a:hover {
+  color: #000 !important;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+/* Carousel için padding */
+body {
+  padding-top: 40px; /* Duyuru alanı kadar */
+  overflow-x: hidden;
+}
+
+/* Clear floats to prevent content from spilling into footer */
+.main-content {
+  overflow: hidden;
+}
+
+/* Ensure footer stays at the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* Ensure main content doesn't overlap footer */
+main, .main-content {
+  margin-bottom: 0 !important;
+  padding-bottom: 2rem; /* Space for footer */
+}
+
+/* Genel (duyuru + header için güvenli başlangıç) */
+body {
+  padding-top: 40px;          /* sadece duyuru barı */
+}
+
+/* Küçük ekranlar - arama barı kalktığı için */
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 80px;        /* duyuru(~40px) + header(~40-50px) */
+  }
+}
+
+@media (max-width: 575px) {     /* çok küçük telefonlar */
+  body {
+    padding-top: 75px;
+  }
+}
+
+/* Ürün detay sayfası özel stiller */
+
+/* Ürün detay sayfasında header her zaman beyaz arka planlı olsun */
+.page-product #mainHeader {
+  background-color: #fff !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Sol kolon (logo kısmı) da beyaz arka plan alsın */
+.page-product #mainHeader .col-6:first-child {
+  background-color: #fff !important;
+}
+
+/* Sağ kolon zaten beyaz, ama emin olalım */
+.page-product #mainHeader .col-6:last-child {
+  background-color: #fff !important;
+}
+
+/* Tüm metin ve ikonlar siyah olsun (scroll/hover fark etmez) */
+.page-product #mainHeader .nav-link,
+.page-product #mainHeader .navbar-brand,
+.page-product #mainHeader .header-icon i {
+  color: #000 !important;
+}
+
+/* Beyaz logo kesinlikle görünmesin (ekstra güvenlik) */
+.page-product #mainHeader .logo-white {
+  display: none !important;
+}
+
+/* Siyah logo her zaman görünsün */
+.page-product #mainHeader .logo-dark {
+  display: inline-block !important;
+}
+
+/* Scroll veya hover'da ekstra değişiklik olmasın (zaten beyaz) */
+.page-product #mainHeader.scrolled,
+.page-product #mainHeader:hover {
+  background-color: #fff !important;
+}
+
+.page-product #mainHeader.scrolled .col-6:first-child,
+.page-product #mainHeader:hover .col-6:first-child {
+  background-color: #fff !important;
+}
+
+/* Ürün detay - üst boşluk ve breadcrumb stili */
+.product-main {
+  padding-top: 140px; /* Header + duyuru için güvenli */
+}
+
+@media (max-width: 991.98px) {
+  .product-main {
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .product-main {
+    padding-top: 100px;
+  }
+}
+
+/* Ürün başlığı stil */
+.fs-4.text-uppercase.fw-bold.mb-0 {
+  font-size: 1.5rem !important;
+}
+
+/* Ürün fiyatı stil */
+.fs-3.fw-bold {
+  font-size: 1.75rem !important;
+}
+
+/* Favori kalp ikon hover efekti */
+.hover-text-danger {
+  transition: color 0.3s ease;
+}
+
+.hover-text-danger:hover {
+  color: #dc3545 !important; /* Kırmızıya döner */
+  transform: scale(1.15);
 }
